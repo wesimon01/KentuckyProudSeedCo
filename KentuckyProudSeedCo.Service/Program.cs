@@ -1,11 +1,13 @@
+using KentuckyProudSeedCo.Data.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,6 +22,9 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(options => {
     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
    };     
 });
+
+builder.Services.AddDbContext<KentuckyProudSeedCoContext>(dbContextOptions => 
+    dbContextOptions.UseSqlite("Data Source=KentuckyProudSeedCo.db"));
 
 var app = builder.Build();
 
