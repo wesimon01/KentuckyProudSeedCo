@@ -1,9 +1,9 @@
 ﻿namespace KentuckyProudSeedCo.Data.Entities
 {
-    public class Vegetable
+    public class ProductCategory : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public ICollection<Variety> Varities { get; set; } = null!;
+        public ICollection<Product> Products { get; set; } = null!;
     }
 }
