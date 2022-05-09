@@ -15,7 +15,5 @@ namespace KentuckyProudSeedCo.Data
         Task<bool> SaveChangesAsync();
         Task<T?> FindById<T>(int id) where T : class;
         Task<IEnumerable<T>> FindAll<T>() where T : class;
-
-
     }
 }

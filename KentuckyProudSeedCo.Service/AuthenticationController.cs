@@ -54,7 +54,7 @@ namespace KentuckyProudSeedCo.Service
 
         private KyProudUser ValidateUserCredentials(string? userName, string? password)
         {
-            return new KyProudUser { Id = 1, UserName = "evan.simon@ky.gov" };
+            return new KyProudUser { Id = 1, UserName = "evan.simon@kyproudseedco.com" };
         }
     }
 }

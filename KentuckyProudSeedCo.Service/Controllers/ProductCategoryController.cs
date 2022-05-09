@@ -5,7 +5,7 @@ namespace KentuckyProudSeedCo.Service.Controllers
 {
     [Authorize]
     [ApiController]
-    public class ProductGroupController : ControllerBase
+    public class ProductCategoryController : ControllerBase
     {
         public IActionResult Index()
         {

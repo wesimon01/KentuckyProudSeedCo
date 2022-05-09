@@ -12,10 +12,7 @@ namespace KentuckyProudSeedCo.Service.Controllers
             return Ok();
         }
 
-        public IActionResult Index()
-        {
-            return Ok();
-        }
+        
 
       
 
