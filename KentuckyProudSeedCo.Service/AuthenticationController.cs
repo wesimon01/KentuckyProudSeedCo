@@ -21,15 +21,12 @@ namespace KentuckyProudSeedCo.Service
         public class AuthenticationRequestBody 
         {
             public string? UserName { get; set; }
-
             public string? Password { get; set; }
-
         }
 
         public class KyProudUser 
         {
             public int Id { get; set; }
-
             public string? UserName { get; set; }
         }
 

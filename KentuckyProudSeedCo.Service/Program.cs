@@ -12,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
+
 builder.Services.AddAuthentication("Bearer").AddJwtBearer(options => { 
    options.TokenValidationParameters = new() { 
     ValidateIssuer = true,
@@ -22,6 +25,8 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(options => {
     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
    };     
 });
+
+//builder.Services.AddDbContext()
 
 builder.Services.AddDbContext<KentuckyProudSeedCoContext>(dbContextOptions => 
     dbContextOptions.UseSqlite("Data Source=KentuckyProudSeedCo.db"));

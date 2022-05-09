@@ -3,23 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KentuckyProudSeedCo.Service.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
-    public class VegetableController : ControllerBase
+    public class ProductController : ControllerBase
     {
         public IActionResult Index()
         {
             return Ok();
         }
 
-        //public Task<IActionResult> GetAllVegetables() 
-        //{
-            
-            
-        //}
+        public IActionResult Index()
+        {
+            return Ok();
+        }
 
-        //public Task<I>
+      
 
-        
     }
 }

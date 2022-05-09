@@ -1,6 +1,8 @@
-﻿namespace KentuckyProudSeedCo.Data.Entities
+﻿using KentuckyProudSeedCo.Data.Interface;
+
+namespace KentuckyProudSeedCo.Data.Entities
 {
-    public class Product : BaseEntity
+    public abstract class Product
     {
         public int Id { get; set; }
         public ProductCategory? ProductCategory { get; set; }
@@ -16,7 +18,5 @@
         public bool KyProudExclusive { get; set; }
         public bool DevelopedByKyProud { get; set; }
         public ICollection<Fact>? QuickFacts { get; set; }
-
-        //public ICollection<ProductInfo> { get; set; }
     }
 }
