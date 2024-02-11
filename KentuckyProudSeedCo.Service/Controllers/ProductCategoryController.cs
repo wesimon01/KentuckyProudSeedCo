@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KentuckyProudSeedCo.Service.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class ProductCategoryController : ControllerBase
     {

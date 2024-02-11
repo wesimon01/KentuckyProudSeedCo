@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,15 +9,21 @@ using System.Text;
 
 namespace KentuckyProudSeedCo.Service
 {
-    [Route("api/authentication")]
     [ApiController]
+    [Route("api/authentication")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IConfiguration config;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public AuthenticationController(IConfiguration config)
+        public AuthenticationController(IConfiguration config, 
+                                        SignInManager<IdentityUser> signInManager, 
+                                        UserManager<IdentityUser> userManager)
         {
             this.config = config;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         public class AuthenticationRequestBody 
@@ -26,35 +34,59 @@ namespace KentuckyProudSeedCo.Service
 
         public class KyProudUser 
         {
-            public int Id { get; set; }
-            public string? UserName { get; set; }
+            public string Id { get; set; } = null!;
+            public string UserName { get; set; } = null!;
         }
 
-        [HttpPost("authenticate")]
-        public ActionResult<string> Authenticate(AuthenticationRequestBody authRequestBody) 
+        [HttpPost]
+        [Route("authenticate")]
+        [AllowAnonymous]
+        public async Task<ActionResult<string>> Authenticate(AuthenticationRequestBody authRequestBody) 
         { 
-            var user = ValidateUserCredentials(authRequestBody.UserName, authRequestBody.Password);
+            if (authRequestBody == null) return BadRequest();
+
+            var user = await ValidateUserCredentials(authRequestBody.UserName, authRequestBody.Password);
             
-            if (user == null) { return Unauthorized(); }
+            if (user == null) return Unauthorized();
 
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config["Authentication:SecretForKey"]));
-            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claimsForToken = new List<Claim>();
-            claimsForToken.Add(new Claim("sub", user.Id.ToString()));            
-
-            var jwtSecurityToken = new JwtSecurityToken(config["Authentication:Issuer"], config["Authentication:Audience"],
-                                                        claimsForToken, DateTime.UtcNow, 
-                                                        DateTime.UtcNow.AddHours(1), signingCredentials);
-
-            var tokenToReturn = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            var tokenToReturn = GenerateToken(user);
 
             return Ok(tokenToReturn);
         }
 
-        private KyProudUser ValidateUserCredentials(string? userName, string? password)
+        private string GenerateToken(KyProudUser user)
         {
-            return new KyProudUser { Id = 1, UserName = "evan.simon@kyproudseedco.com" };
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config["Authentication:SecretForKey"]));
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            List<Claim> claims = new();
+            claims.Add(new(JwtRegisteredClaimNames.Sub, user.Id.ToString()));
+            claims.Add(new(JwtRegisteredClaimNames.UniqueName, user.UserName));
+
+            var jwtSecurityToken = new JwtSecurityToken(config["Authentication:Issuer"],
+                                                        config["Authentication:Audience"],
+                                                        claims,
+                                                        DateTime.UtcNow,
+                                                        DateTime.UtcNow.AddHours(1),
+                                                        signingCredentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+        }
+
+        private async Task<KyProudUser?> ValidateUserCredentials(string? userName, string? password)
+        {
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password)) {
+                return null;
+            }
+            
+            var result = await signInManager.PasswordSignInAsync(userName, password, isPersistent: false, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                var user = await userManager.FindByNameAsync(userName);
+                return new KyProudUser { Id = user.Id, UserName = user.UserName };
+            }
+            else return null; 
         }
     }
 }

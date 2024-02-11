@@ -1,0 +1,153 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+
+<div class="page">
+    <MudPaper Height="50px" Width="100%">  
+        <MudPaper Height="50px" Width="100%" Square="true" Class="mud-theme-primary"></MudPaper>
+    </MudPaper>
+    <MudPaper Height="100px" Width="100%">
+        <MudPaper Height="100px" Width="100%" Square="true"></MudPaper>
+    </MudPaper>
+    <MudPaper Height="50px" Width="100%">
+        <MudPaper Height="50px" Width="100%" Square="true" Class="mud-theme-primary"></MudPaper> 
+    </MudPaper>
+
+    <div class="d-flex flex-row justify-center">
+        <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+                    <MudTabPanel Text="Mouse Over"></MudTabPanel>
+                </MudTabs>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Theme</MudMenuItem>
+                <MudMenuItem>Usage</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+            <MudTabPanel Text="Mouse Over"></MudTabPanel>
+        </MudTabs>
+      
+         <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+                    <MudTabPanel Text="Mouse Over"></MudTabPanel>
+                </MudTabs>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Theme</MudMenuItem>
+                <MudMenuItem>Usage</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+                    <MudTabPanel Text="Mouse Over"></MudTabPanel>
+                </MudTabs>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Theme</MudMenuItem>
+                <MudMenuItem>Usage</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+                    <MudTabPanel Text="Mouse Over"></MudTabPanel>
+                </MudTabs>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Theme</MudMenuItem>
+                <MudMenuItem>Usage</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+                    <MudTabPanel Text="Mouse Over"></MudTabPanel>
+                </MudTabs>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Theme</MudMenuItem>
+                <MudMenuItem>Usage</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudTabs Elevation="4" Centered="true" Color="@Color.Primary">
+                    <MudTabPanel Text="Mouse Over"></MudTabPanel>
+                </MudTabs>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Theme</MudMenuItem>
+                <MudMenuItem>Usage</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+    </div>
+
+
+    @* <MudContainer >
+        <MudTabs Elevation="4" Rounded="true" Color="@Color.Dark" PrevIcon="@Icons.Material.Filled.SkipPrevious" NextIcon="@Icons.Material.Filled.SkipNext">
+            <MudTabPanel Text="One" >
+                
+            </MudTabPanel>
+            <MudTabPanel Text="Two" />
+            <MudTabPanel Text="Three" />
+            <MudTabPanel Text="Four" />
+            <MudTabPanel Text="Five" />
+            <MudTabPanel Text="Six" />
+            <MudTabPanel Text="Seven" />
+            <MudTabPanel Text="Eight" />
+            <MudTabPanel Text="Nine" />
+            <MudTabPanel Text="Ten" />
+            <MudTabPanel Text="Eleven" />
+            <MudTabPanel Text="Thirteen" />
+        </MudTabs>
+    </MudContainer> *@
+
+    @* <div class="sidebar">
+        <NavMenu />
+    </div> *@
+
+    <main>
+@*         <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+ *@
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+@code {
+    MudTabPanel tabPanel = new();
+
+    protected override void OnInitialized()
+    {
+ 
+    }
+}
